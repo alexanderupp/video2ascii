@@ -26,6 +26,3 @@ You can also "optimize" the output file by passing the `optimize=1` flag. Howeve
 ```bash
   $ php covert.php video.mp4 demo.json optmize=1
 ```
-## Notes
-
-I take no responsibility for the quality of this code, nor its output. It was thrown together quickly to create an easter egg on my website and was never meant to see the light of day.
