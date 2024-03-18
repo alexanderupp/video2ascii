@@ -15,7 +15,7 @@ Clone the repo and you're basically ready to go. You will need to have ffmpeg an
 
 ## Usage/Examples
 
-Coverting a video file called `video.mp4` into an output file called `demo.json`.
+Converting a video file called `video.mp4` into an output file called `demo.json`.
 
 ```bash
   $ php convert.php video.mp4 demo.json
