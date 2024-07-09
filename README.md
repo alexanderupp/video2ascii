@@ -20,9 +20,3 @@ Converting a video file called `video.mp4` into an output file called `demo.json
 ```bash
   $ php convert.php video.mp4 demo.json
 ```
-
-You can also "optimize" the output file by passing the `optimize=1` flag. However, this doesn't really work all that well with the renderer yet.
-
-```bash
-  $ php covert.php video.mp4 demo.json optmize=1
-```

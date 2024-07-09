@@ -4,7 +4,7 @@
 	 * 
 	 */
 	class Frame {
-		private $ascii = [];
+		private $ascii;
 		private $file;
 		private $frame;
 
@@ -39,12 +39,18 @@
 				imagedestroy($temp);
 			}
 
+			$this->ascii = "";
+
 			for($y = 0; $y < self::HEIGHT; $y++) {
+				// intialize empty frame line string
+				//$this->ascii[$y] = "";
+
 				for($x = 0; $x < self::WIDTH; $x++) {
 					$pixel = $this->int2rgb(imagecolorat($this->frame, $x, $y));
 
 					$brightness = round((($pixel[0] + $pixel[1] + $pixel[2]) / 3) / 25);
-					$this->ascii[$y][$x] = ASCII::VALUES[$brightness];
+					//$this->ascii[$y] .= ASCII::VALUES[$brightness];
+					$this->ascii .= ASCII::VALUES[$brightness];
 				}
 			}
 
@@ -58,7 +64,7 @@
 		 * 
 		 * @return array
 		 */
-		public function getFrame() : array {
+		public function getFrame() : string {
 			return $this->ascii;
 		}
 

@@ -2,8 +2,9 @@
 	#!/usr/bin/php
 
 	include "app/ASCII.php";
-	include "app/Optimizer.php";
+	//include "app/Optimizer.php";
 	include "app/Frame.php";
+	include "app/RTL_Encoder.php";
 
 	// check if a video file name was provided
 	if($argc == 1) {
@@ -41,7 +42,7 @@
 	// fire a call to ffmpeg to export the frames
 	// we want only 4 frames per second at 640x360 resolution
 	echo "Exporting video frames\n";
-	echo shell_exec("ffmpeg -i " . $filename . " -vf fps=4,scale=640:360 ./img/frame%d.jpg");
+	echo shell_exec("ffmpeg -loglevel warning -i " . $filename . " -vf fps=4,scale=640:360 ./img/frame%d.jpg");
 
 	// get all of the newly exported frames
 	foreach(new DirectoryIterator($img) as $file) {
@@ -84,31 +85,20 @@
 
 	echo "\n";
 	print number_format((($end - $start) / 1e6 ), 3, ".", "") . "ms\n";
-	
 
-	$bOptimize = false;
-
-	// ugly check for compression flag
-	if($argc > 1) {
-		foreach($argv as $arg) {
-			if($arg == "optimize=1") {
-				$bOptimize = true;
-
-				break;
-			}
-		}
-	}
-
-	if($bOptimize) {
-		echo "Optmizing Frames\n";
-		
-		$optimizer = new Optimizer();
-		$optimizer->optimize($frames, 2);
-	}
+	/** SIMPLE RUNTIME LENGTH ENCODING */
+	$rtl = new RTL_Encoder();
+	$rtl->encode($frames);
 
 	echo "Exporting to JSON\n";
 
-	$json = json_encode($frames, JSON_FORCE_OBJECT);
+	$json = json_encode([
+		[
+			"width" => 128,
+			"height" => 72
+		],
+		$frames
+	], JSON_FORCE_OBJECT);
 
 	file_put_contents($output, $json);
 
@@ -124,17 +114,17 @@
 	 * @return void
 	 */
 	function printProgress(int $total, int $step) : void{
-		// scale the bar down to 80 chars
-		$ratio = 80 / $total;
+		// scale the bar down to 64 chars
+		$ratio = 64 / $total;
 		echo "\r[";
 
-		$complete = round((($step / $total) * 80));
+		$complete = round((($step / $total) * 64));
 
 		// array_fill is kind of slow
 		// but I'm ok with it here.
 		$bar = array_merge(
 			array_fill(0, $complete, "#"),
-			array_fill($complete, 80 - $complete, "-")
+			array_fill($complete, 64 - $complete, "-")
 		);
 
 		echo implode("", $bar) . "]";

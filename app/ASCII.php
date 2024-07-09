@@ -5,11 +5,11 @@
 	 */
 	class ASCII {
 		const VALUES = [
-			"#",
 			"@",
+			"#",
 			"0",
 			"O",
-			"x",
+			"g",
 			"o",
 			"c",
 			";",
