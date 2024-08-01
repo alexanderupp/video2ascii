@@ -20,3 +20,5 @@ Converting a video file called `video.mp4` into an output file called `demo.json
 ```bash
   $ php convert.php video.mp4 demo.json
 ```
+
+The output file will automatically be optimized with a form of Run Length encoding.
