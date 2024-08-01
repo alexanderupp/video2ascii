@@ -4,7 +4,7 @@
 	include "app/ASCII.php";
 	//include "app/Optimizer.php";
 	include "app/Frame.php";
-	include "app/RTL_Encoder.php";
+	include "app/RL_Encoder.php";
 
 	// check if a video file name was provided
 	if($argc == 1) {
@@ -86,9 +86,9 @@
 	echo "\n";
 	print number_format((($end - $start) / 1e6 ), 3, ".", "") . "ms\n";
 
-	/** SIMPLE RUNTIME LENGTH ENCODING */
-	$rtl = new RTL_Encoder();
-	$rtl->encode($frames);
+	/** SIMPLE RUN LENGTH ENCODING */
+	$rle = new RL_Encoder();
+	$rle->encode($frames);
 
 	echo "Exporting to JSON\n";
 

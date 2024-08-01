@@ -1,9 +1,9 @@
 <?php
 
 	/**
-	 * Simple RTL encoder
+	 * Simple RL encoder
 	 */
-	class RTL_Encoder {
+	class RL_Encoder {
 		/**
 		 * Start the encoding process
 		 * 
