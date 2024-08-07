@@ -42,7 +42,7 @@
 	// fire a call to ffmpeg to export the frames
 	// we want only 4 frames per second at 640x360 resolution
 	echo "Exporting video frames\n";
-	echo shell_exec("ffmpeg -loglevel warning -i " . $filename . " -vf fps=4,scale=640:360 ./img/frame%d.jpg");
+	echo shell_exec("ffmpeg -loglevel warning -i " . $filename . " -vf fps=8,scale=640:360 ./img/frame%d.jpg");
 
 	// get all of the newly exported frames
 	foreach(new DirectoryIterator($img) as $file) {
