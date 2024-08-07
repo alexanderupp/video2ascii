@@ -113,7 +113,7 @@
 	 * @param int $frame		Current step number
 	 * @return void
 	 */
-	function printProgress(int $total, int $step) : void{
+	function printProgress(int $total, int $step) : void {
 		// scale the bar down to 64 chars
 		$ratio = 64 / $total;
 		echo "\r[";
@@ -128,27 +128,4 @@
 		);
 
 		echo implode("", $bar) . "]";
-	}
-
-	/**
-	 * Output a single frame array for testing. Must be called via browser
-	 * This WON'T work with compression on. Each frame builds off of the last
-	 * 
-	 * @param array $ascii		2D array containing the ASCII frame data
-	 * @return void
-	 */
-	function debug(array $ascii) : void {
-		echo "<pre style='font-family:monospace; font-size:12px; line-height:0.5em;'>";
-		
-		foreach($ascii as $frame) {
-			for($y = 0; $y < 36; $y++) {
-				for($x = 0; $x < 64; $x++) {
-					echo $frame[$y][$x];
-				}
-
-				echo "\n";
-			}
-		}
-
-		echo "</pre>\n";
 	}
